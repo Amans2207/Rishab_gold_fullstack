@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 text-white">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="rg-gold fw-bold">My Shopping Cart</h2>
+        {% if items %}
+        <a href="{{ url_for('clear_cart') }}" class="btn btn-sm btn-outline-danger">Clear All</a>
+        {% endif %}
+    </div>
+
+    {% if items %}
+    <div class="row">
+        <div class="col-md-8">
+            {% for item in items %}
+            <div class="card bg-dark border-secondary mb-3 p-3 shadow-sm">
+                <div class="row align-items-center">
+                    <div class="col-3 col-md-2">
+                        <img src="{{ url_for('static', filename='images/' + item.image) }}" class="img-fluid rounded shadow-sm">
+                    </div>
+                    <div class="col-6 col-md-7">
+                        <h5 class="mb-1 text-warning">{{ item.name }}</h5>
+                        <p class="mb-0 text-white-50 small">Price: ₹{{ item.price }}</p>
+                    </div>
+                    <div class="col-3 col-md-3 text-end">
+                        <a href="{{ url_for('remove_from_cart', index=loop.index0) }}" class="text-danger">
+                            <i class="fas fa-trash-alt fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card bg-dark border-gold p-4" style="border: 2px solid #ffcc00; border-radius: 15px;">
+                <h4>Summary</h4>
+                <hr class="bg-secondary">
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Total Items:</span>
+                    <span>{{ items|length }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-4">
+                    <span class="fs-5">Total Price:</span>
+                    <span class="fs-4 text-warning fw-bold">₹{{ total }}</span>
+                </div>
+                <a href="{{ url_for('checkout') }}" class="btn btn-warning w-100 fw-bold py-3 shadow">
+    CHECKOUT & PAY (₹{{ total }})
+</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-shopping-basket fa-5x mb-4 text-secondary"></i>
+        <h3>Aapka Cart khaali hai, Aman!</h3>
+        <a href="/" class="btn btn-warning mt-3 px-5 fw-bold">SHOP NOW</a>
+    </div>
+    
+    {% endif %}
+</div>
+{% endblock %}
