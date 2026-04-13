@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5 mb-4">
+    <div class="p-4 text-center rounded-4 shadow-lg" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.3);">
+        <h2 class="rg-gold mb-2 fw-bold" style="font-family: 'Playfair Display', serif;">{{ info.name }}</h2>
+        
+        <div class="d-flex flex-wrap justify-content-center gap-4 mb-4 mt-3" style="font-size: 0.9rem; color: #ddd;">
+            <span><i class="fas fa-map-marker-alt rg-gold me-2"></i> {{ info.address }}</span>
+            <span><i class="fas fa-phone-alt rg-gold me-2"></i> +{{ info.contact }}</span>
+            <span><i class="fas fa-envelope rg-gold me-2"></i> {{ info.email }}</span>
+        </div>
+
+        <hr style="border-color: rgba(212, 175, 55, 0.2); width: 50%; margin: 20px auto;">
+
+        <p class="mx-auto text-light" style="max-width: 750px; line-height: 1.6;">
+            We are India's leading distributors of <span class="text-white">Rishab Gold Premium LEDs</span>. 
+            Providing high-quality lighting solutions for industries, showrooms, and modern homes. 
+            Visit our godown for exclusive bulk deals and certified products.
+        </p>
+    </div>
+</div>
+<div class="container text-center py-5">
+    <h1 class="display-4 fw-bold text-white mb-3">"Illuminate with Elegance"</h1>
+<p class="lead text-light mb-5">Select a brand to explore 400+ lighting products.</p>
+   <div class="mt-4 shadow-sm" style="
+    background-color: #FF8C00; 
+    color: white; 
+    padding: 15px 25px; 
+    border-radius: 50px; 
+    display: inline-block; 
+    font-weight: 600;
+    border: 2px solid #e67e00;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+">
+    <i class="fas fa-truck-moving me-2"></i> 
+    <strong>Directly from our Godown:</strong> 
+    <span style="color: #fff6e5;">{{ info.godown_name }}</span> - Quality Guaranteed.
+</div>
+    
+</div>
+
+<div class="container mt-4 mb-2">
+    <div class="p-4 text-center rounded-4" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.2);">
+        <h5 class="rg-gold mb-3 text-uppercase fw-bold" style="letter-spacing: 3px;">About Our Store</h5>
+        <p class="mx-auto" style="max-width: 800px; color: #bbb; line-height: 1.8;">
+            Welcome to <span class="text-white fw-bold">Rishab Gold Lighting</span>, Pune's premier destination for high-end industrial and commercial LED solutions. 
+            We specialize in energy-efficient track lights, premium panel series, and heavy-duty LED drivers. 
+            With over 400+ curated products, we bring world-class illumination directly from our warehouse to your doorstep.
+        </p>
+    </div>
+</div>
+<div class="container py-5 text-center">
+    <h2 class="mb-4">"Illuminate with Elegance"</h2>
+    <p class="lead text-light mb-5">Select a brand to explore 400+ lighting products.</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-5 mb-4">
+            <div class="card shadow border-0 p-5" style="cursor: pointer; border-bottom: 5px solid var(--gold) !important;" onclick="location.href='/brand/Rishab-Gold'">
+                <h2 class="fw-bold">RISHAB GOLD</h2>
+                <p>Exclusive Indoor & Panel Lights</p>
+                <button class="btn btn-dark">View Catalog</button>
+            </div>
+        </div>
+
+        <div class="col-md-5 mb-4">
+            <div class="card shadow border-0 p-5" style="cursor: pointer; border-bottom: 5px solid var(--gold) !important;" onclick="location.href='/brand/Rishab-Drivers'">
+                <h2 class="fw-bold">RISHAB DRIVERS</h2>
+                <p>Industrial LED Drivers & Strips</p>
+                <button class="btn btn-dark">View Catalog</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

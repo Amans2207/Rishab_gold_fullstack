@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .product-card { background: var(--gray); border: 1px solid #333; border-radius: 20px; transition: 0.4s; overflow: hidden; }
+    .product-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15); }
+    .product-img { height: 250px; object-fit: contain; padding: 20px; transition: 0.5s; }
+    .product-card:hover .product-img { transform: scale(1.1); }
+    .spec-box { font-size: 0.75rem; color: #bbb; background: #222; padding: 5px 10px; border-radius: 5px; margin-bottom: 5px; }
+    .whatsapp-btn { background: linear-gradient(45deg, #128C7E, #25D366); border: none; font-weight: 600; padding: 12px; }
+</style>
+
+<div class="container py-5">
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-6">
+            <h1 class="rg-gold fw-bold">{{ brand }} Collection</h1>
+        </div>
+        <div class="col-md-6">
+            <form class="d-flex shadow-sm">
+                <input type="text" name="search" class="form-control bg-dark text-white border-secondary" placeholder="Search from 400+ items...">
+                <button class="btn btn-warning ms-2 px-4">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for p in products %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card h-100 product-card">
+                <img src="/static/images/{{ p.image }}" class="product-img">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-2">{{ p.name }}</h6>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <span class="spec-box"><i class="fas fa-bolt text-warning me-1"></i> 12W</span>
+                        <span class="spec-box"><i class="fas fa-certificate text-info me-1"></i> 2Y War.</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="h5 rg-gold fw-bold mb-0">₹{{ p.price }}</span>
+                        <span class="badge {% if p.stock > 10 %}bg-success{% else %}bg-danger{% endif %}">Stock: {{ p.stock }}</span>
+                    </div>
+                    <a href="https://wa.me/{{ info.contact }}?text=Inquiry%20for%20{{ p.name }}" class="btn whatsapp-btn w-100 text-white shadow-sm" target="_blank">
+                        <i class="fab fa-whatsapp me-2"></i> ORDER NOW
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

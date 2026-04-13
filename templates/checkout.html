@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <h3 class="text-gold">Order Summary</h3>
+                <hr>
+                <img src="/static/images/{{ product.image }}" style="width: 100px;">
+                <h4>{{ product.name }}</h4>
+                <p class="h4 text-success">Total Amount: ₹{{ product.price }}</p>
+                <p class="text-muted">Brand: {{ product.brand }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 text-center">
+            <div class="card p-5 shadow-sm bg-light">
+                <h3>Complete Your Payment</h3>
+                <p>Scan QR or use Card/Netbanking via Secure Gateway</p>
+                
+                <button id="rzp-button1" class="btn btn-dark btn-lg w-100 py-3 fw-bold">PAY NOW (Securely)</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{ key_id }}",
+    "amount": "{{ order.amount }}",
+    "currency": "INR",
+    "name": "Rishab Gold Lighting",
+    "description": "Payment for {{ product.name }}",
+    "order_id": "{{ order.id }}",
+    "handler": function (response){
+        // Payment Success hone ke baad yahan se WhatsApp Bill trigger hoga
+        alert("Payment Successful! Sending Bill to WhatsApp...");
+        window.location.href = "/payment_success?id=" + response.razorpay_payment_id;
+    },
+    "theme": { "color": "#D4AF37" } // Gold Theme
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+{% endblock %}
