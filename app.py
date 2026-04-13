@@ -168,6 +168,34 @@ def payment_success():
     session.pop('cart', None) # Cart clear
     return render_template('success.html', name=name, pay_id=pay_id)
 
+# 1. Product Delete karne ke liye
+@app.route('/delete_product/<int:id>')
+def delete_product(id):
+    if not session.get('logged_in'): return redirect(url_for('login'))
+    product = Product.query.get(id)
+    if product:
+        db.session.delete(product)
+        db.session.commit()
+        flash("Product deleted successfully!", "danger")
+    return redirect(url_for('admin_dashboard'))
+
+# 2. Naya Product Add karne ke liye
+@app.route('/add_product', methods=['GET', 'POST'])
+def add_product():
+    if not session.get('logged_in'): return redirect(url_for('login'))
+    if request.method == 'POST':
+        name = request.form.get('name')
+        brand = request.form.get('brand')
+        price = float(request.form.get('price'))
+        stock = int(request.form.get('stock'))
+        image = request.form.get('image') # Abhi simple text input le lo image ke liye
+        
+        new_p = Product(name=name, brand=brand, price=price, stock=stock, image=image)
+        db.session.add(new_p)
+        db.session.commit()
+        return redirect(url_for('admin_dashboard'))
+    return render_template('add_product.html') # Ye file tumhe banani padegi
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
